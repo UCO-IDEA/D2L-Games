@@ -1,0 +1,254 @@
+--- samples/GettingStartedSample/index.php	(revision 850)
++++ samples/GettingStartedSample/index.php	(working copy)
+@@ -38,21 +38,28 @@
+     $_SESSION['appKey'] = $appKey;
+ }
+ 
+-if (isset($_SESSION['host'])) {
+-    $host = $_SESSION['host'];
+-} else {
+-    $host="valence.desire2learn.com";
++if (isset($_SESSION['host'])) {
++    $host = $_SESSION['host'];
++} else {
++    $host="valence.desire2learn.com";
+ }
+ 
+-if (isset($_SESSION['port'])) {
+-    $port = $_SESSION['port'];
+-} else {
+-    $port=443;
++if (isset($_SESSION['port'])) {
++    $port = $_SESSION['port'];
++} else {
++    $port=443;
+ }
+ 
++if (isset($_SESSION['scheme'])) {
++	$scheme = $_SESSION['scheme'];
++} else {
++	$scheme = 'https';
++}
++
+ $authContextFactory = new D2LAppContextFactory();
+ $authContext = $authContextFactory->createSecurityContext($appId, $appKey);
+-$opContext = $authContext->createUserContext($host, $port, true, null, null,$_SERVER["REQUEST_URI"]);
++$hostSpec = new D2LHostSpec($host, $port, $scheme);
++$opContext = $authContext->createUserContextFromHostSpec($hostSpec, null, null, $_SERVER["REQUEST_URI"]);
+ 
+ if ($opContext!=null) {
+     $userId = $opContext->getUserId();
+@@ -102,65 +109,159 @@
+ 		{
+ 			background-color: transparent !important;
+ 		}
++
++		.error
++		{
++			color: #FF0000;
++		}
+ 	</style>
+-
+-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type = "text/javascript"></script>
+-    <script src = "sample.js" type = "text/javascript"></script>
++	<script src="sample.js"></script>
++	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type = "text/javascript"></script>
+ </head>
+ <body>
++	<form method="get" action="authenticateUser.php" id="configForm">
++	<input type="submit" name="authBtn" value="Load Defaults" id="resetButton" />
++	<hr />
++	<table>
++		<tr>
++			<td>
++				<b>Host: </b>
++			</td>
++			<td>
++				<input name="hostField" type="text" value="<?php echo $host; ?>" id="hostField" />
++			</td>
++			<td>
++				<b>Port:</b>
++			</td>
++			<td>
++				<input name="portField" type="text" value="<?php echo $port; ?>" id="portField" />
++			</td>
++			<td>
++				<input id="schemeField" type="checkbox" name="schemeField" <?php echo $scheme == 'https' ? 'checked="true"' : '';?> />
++				HTTPS
++			</td>
++		</tr>
++		<tr>
++			<td>
++				<b>App ID:</b>
++			</td>
++			<td>
++				<input name="appIDField" type="text" value="<?php echo $appId; ?>" id="appIDField" />
++			</td>
++			<td>
++				<b>App Key:</b>
++			</td>
++			<td>
++				<input name="appKeyField" type="text" value="<?php echo $appKey; ?>" id="appKeyField" />
++			</td>
++		</tr>
++	</table>
++	<div id="userDiv">
++		<br />
++		<span>This information is returned by the authentication server and is valid only for this application:</span>
++		<table>
++			<tr>
++				<td>
++					<b>User ID:</b>
++				</td>
++				<td>
++					<span id="userIDField"><?php echo $userId; ?></span>
++				</td>
++			</tr>
++			<tr>
++				<td>
++					<b>User Key:</b>
++				</td>
++				<td>
++					<span id="userKeyField"><?php echo $userKey; ?></span>
++				</td>
++			</tr>
++		</table>
++		<input type="submit" name="authBtn" value="Deauthenticate" id="deauthButton">
++	</div>
++	<span id="authNotice">Note: to authenticate against the test server, you can user username
++						  "sampleapiuser" and password "Tisabiiif".
++	</span><br />
++	<input type="submit" name="authBtn" value="Authenticate" id="authenticateButton" />
++	</form>
+ 
+-	<form id="configForm" action="authenticateUser.php" method="get">
+-        <table>
+-            <tr>
+-                <td>
+-                    <h4>Host: </h4></td>
+-                <td>
+-                    <input id="hostField" name="hostField" type="text" size=30 value="<?php echo $host;?>" /></td>
+-                <td>
+-                    <h4>Port:</h4> </td>
+-                <td>
+-                    <input id="portField" name="portField" type="text" size=3 value="<?php echo $port;?>" /></td>
+-            </tr>
+-            <tr>
+-                <td>
+-                    <h4>App ID:</h4></td>
+-                <td>
+-                    <input id="appIDField" name="appIDField" type="text" size=30 value="<?php echo $appId;?>" /></td>
+-                <td>
+-                    <h4>App Key:</h4></td>
+-                <td>
+-                    <input id="appKeyField" name="appKeyField" type="text" size=30 value = "<?php echo $appKey;?>" /></td>
+-            </tr>
+-    		<tr>
+-                <td>
+-                    <h4>User ID:</h4></td>
+-                <td>
+-                    <input id="userIDField" type="text" size=30  value="<?php echo $userId;?>" /></td>
++	<hr />
++	<table>
++		<tr>
++			<td>
++				<b>Examples:</b>
++			</td>
++			<td>
++				<button type="button" onclick="exampleGetVersions()">
++					Get Versions</button>
++			</td>
++		</tr>
++		<tr>
++			<td>
++			</td>
++			<td>
++				<button type="button" onclick="exampleWhoAmI()">
++					WhoAmI</button>
++			</td>
++		</tr>
++	</table>
++	<br />
++	<b>Method:</b>&nbsp;
++	<input value="GET" name="method" type="radio" id="GETField" checked="checked" onclick="hideData()" />GET
++	&nbsp;
++	<input value="POST" name="method" type="radio" id="POSTField" onclick="showData()" />POST<br />
++	<b></b>&nbsp;<input id="anonymousField" type="checkbox" name="anonymousField" /><label for="anonymousField">Anonymous</label><br />
++	<b>Action:</b>&nbsp;<input name="actionField" type="text" id="actionField" style="width:600px;" /><br />
++	<b id="dataFieldLabel">Data:</b><br />
++	<textarea name="dataField" rows="2" cols="20" id="dataField" style="height:400px;width:600px;">
++</textarea><br />
++	<b id="responseFieldLabel">Response:</b><br />
++	<textarea name="responseField" rows="2" cols="20" id="responseField" style="height:400px;width:600px;">
++</textarea><br />
++	<input type="button" name="submitButton" value="Submit" id="submitButton" onclick="doAPIRequest()"/>
+ 
+-                <td>
+-                    <h4>User Key:</h4></td>
+-                <td>
+-                    <input id="userKeyField" type="text" size=30 value="<?php echo $userKey;?>" /></td>
+-            </tr>
+-        </table>
+-        <input type="submit" value="Authenticate" /> Note: to authenticate against the test server, you can user username "sampleapiuser" and password "Tisabiiif".
+-	</form>
+-	<input type="button" value="Save" onclick="save()" />
+-    <hr />
++</body>
++<script type="text/javascript">
++	function showData() {
++		document.getElementById("dataFieldLabel").hidden = false;
++		document.getElementById("dataField").hidden=false;
++	}
+ 
+-    <table style="float:left;" class = "plain">
+-        <tr class = "plain">
+-            <td class = "plain">
+-                <input id="getVersionsBtn" type="button" value="Get Versions" style = "float:right" onclick = "getVersions()" /><br /><br />
+-                <input id="whoamiButton" type="button" value="Who Am I?" style = "float:right" onclick = "whoAmI()" /><br /><br />
+-                <input id="clearButton" type="button" value="Clear" style = "float:right" onclick = "clearTextArea()" />
+-            </td>
+-            <td class = "plain">
+-                <span id = "resultHeading" style = "clear:both;float:left;color: black;" ></span>
+-                <span id = "result" style = "clear:both;float:left;color: black;text-align:left" ></span>
+-            </td>
+-        </tr>
+-    </table>
++	function hideData() {
++		document.getElementById("dataFieldLabel").hidden = true;
++		document.getElementById("dataField").hidden=true;
++	}
+ 
+-</body>
++	function exampleGetVersions() {
++		hideData();
++		document.getElementById("anonymousField").checked = true;
++		document.getElementById("GETField").checked = true;
++		document.getElementById("actionField").value = "/d2l/api/versions/";
++	}
++
++	function exampleWhoAmI() {
++		hideData();
++		document.getElementById("anonymousField").checked = false;
++		document.getElementById("GETField").checked = true;
++		document.getElementById("actionField").value = "/d2l/api/lp/1.0/users/whoami";
++	}
++
++	hideData();
++
++	if(document.getElementById("userIDField").innerHTML != "") {
++		document.getElementById("authenticateButton").hidden = true;
++		document.getElementById("authNotice").hidden = true;
++		document.getElementById("hostField").disabled = true;
++		document.getElementById("portField").disabled = true;
++		document.getElementById("appKeyField").disabled = true;
++		document.getElementById("appIDField").disabled = true;
++	} else {
++		document.getElementById("userDiv").hidden = true;
++		document.getElementById("hostField").disabled = false;
++		document.getElementById("portField").disabled = false;
++		document.getElementById("appKeyField").disabled = false;
++		document.getElementById("appIDField").disabled = false;
++	}
++
++</script>
+ </html>

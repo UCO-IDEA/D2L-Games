@@ -1,0 +1,488 @@
+body {
+	background-color: #313131;
+	background-image: url(img/bg-patterh.png);
+}#grades{background:#fff;}
+.box {
+	width: 938px;
+	float: left;
+}
+img {
+	width: 100%;
+}
+.profileIMG{width:97px;
+height:123px;;}
+.nickName {
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 1em;
+}
+.name {
+	font-size: 2em;
+	font-weight: bold;
+	line-height: 1em;
+	color:white;
+}
+#profile {
+	float: left;
+	width: 400px;
+	height:160px;
+	background-color: #fff;
+	margin: 10px;
+	padding: 10px;
+	background-image:url(img/profile.png);
+	color:white;
+}
+.totalXP {
+	font-size:2em;
+	text-align:right
+}
+.Denominator {
+	margin-right:161px;
+}
+.level {
+	font-size:3em;
+	font-weight:bold;
+	margin-top:1em;
+}
+.levelTXT {
+	font-size:.5em;
+}
+/*Badges*/
+#case {
+	float: left;
+	width: 420px;
+	margin-left: 10px;
+}
+#badgeCase {
+	background-image: url(img/BadgeCase.png);
+	width: 469px;
+	height: 321px;
+	background-repeat: no-repeat;
+	position: relative;
+}
+#badgeCase ul {
+	list-style: none;
+	margin-left: 0;
+}
+#badgeCase li {
+	position: absolute;
+}
+.badges {
+	display: block;
+	width: 42px;
+	height: 92px;
+	background-image: url(img/Badges.png);
+	background-position: 0px 0px;
+	left: 0px;
+	top: 0px;
+}
+.basic {
+	background-position: left top;
+	left: 24px;
+	top: 163px;
+}
+.toxic {
+	background-position: -38px top;
+	left: 56px;
+	top: 163px;
+	width: 50px;
+}
+.insect {
+	background-position: -94px top;
+	left: 110px;
+	top: 163px;
+}
+.bolt {
+	background-position: -148px top;
+	left: 164px;
+	top: 163px;
+}
+.quake {
+	background-position: -205px top;
+	left: 218px;
+	top: 163px;
+}
+.jet {
+	background-position: -257px top;
+	left: 269px;
+	top: 163px;
+}
+.legend {
+	background-position: -299px top;
+	left: 310px;
+	top: 163px;
+	width: 50px;
+}
+.wave {
+	background-position: -358px top;
+	left: 368px;
+	top: 163px;
+}
+.medals {
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-position: 0px -17px;
+	left: 0px;
+	top: 0px;
+}
+#blue {
+	left: 133px;
+	top: 33px;
+	position: absolute;
+}
+.blue {
+	background-image: url(img/blue-medals.png)
+}
+.red {
+	background-image: url(img/red-medals.png)
+}
+.purple {
+	background-image: url(img/purple-medals.png)
+}
+.bronze {
+	background-image: url(img/bronze-medals.png)
+}
+.one {
+	background-position: 2px 2px;
+	left: 0px;
+	top: 0px;
+}
+.two {
+	background-position: -45px 0px;
+	left: 51px;
+	top: 0px;
+}
+.three {
+	background-position: -95px 0px;
+	left: 102px;
+	top: 0px;
+}
+.four {
+	background-position: -144px -1px;
+	left: 26px;
+	top: 51px;
+}
+.five {
+	background-position: -197px 2px;
+	left: 82px;
+	top: 51px;
+}
+#map {
+	width: 486px;
+	height: 486px;
+	background: url(img/worldmap.png) no-repeat;
+	position: relative;
+	overflow: hidden;
+	float: left;
+}
+.unread, .module {
+	width: 22px;
+	height: 22px;
+	background-image: url(img/visit.png);
+	z-index: 50;
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+.read {
+	width: 22px;
+	height: 22px;
+	background-image: url(img/visit.png);
+	z-index: 50;
+	background-position: 0px -22px;
+	background-repeat: no-repeat;
+}
+#map ul {
+	list-style: none;
+}
+#map li {
+	position: absolute;
+}
+.roadVert4 {
+	background-image: url("img/roadVert4.png");
+	position: absolute;
+	left: 160px;
+	top: 304px;
+	width: 20px;
+	height: 146px;
+	z-index: 26;
+}
+.roadVert5 {
+	background-image: url("img/roadVert5.png");
+	position: absolute;
+	left: 103px;
+	top: 240px;
+	width: 17px;
+	height: 61px;
+	z-index: 25;
+}
+.roadVert3 {
+	background-image: url("img/roadVert3.png");
+	position: absolute;
+	left: 297px;
+	top: 171px;
+	width: 16px;
+	height: 152px;
+	z-index: 24;
+}
+.roadVert2 {
+	background-image: url("img/roadVert2.png");
+	position: absolute;
+	left: 297px;
+	top: 99px;
+	width: 16px;
+	height: 50px;
+	z-index: 23;
+}
+.roadVert1 {
+	background-image: url("img/roadVert1.png");
+	position: absolute;
+	left: 361px;
+	top: 99px;
+	width: 17px;
+	height: 50px;
+	z-index: 22;
+}
+.roadVert10 {
+	background-image: url("img/roadVert10.png");
+	position: absolute;
+	left: 160px;
+	top: 254px;
+	width: 17px;
+	height: 29px;
+	z-index: 24;
+}
+.roadHor3_copy_3 {
+	background-image: url("img/roadHor3-copy-3.png");
+	position: absolute;
+	left: 119px;
+	top: 285px;
+	width: 38px;
+	height: 16px;
+	z-index: 21;
+}
+.roadHor3_copy {
+	background-image: url("img/roadHor3-copy.png");
+	position: absolute;
+	left: 119px;
+	top: 240px;
+	width: 81px;
+	height: 16px;
+	z-index: 20;
+}
+.roadHor3_copy_5 {
+	background-image: url("img/roadHor3-copy-5.png");
+	position: absolute;
+	left: 160px;
+	top: 433px;
+	width: 67px;
+	height: 17px;
+	z-index: 19;
+}
+.roadHor3_copy_4 {
+	background-image: url("img/roadHor3-copy-4.png");
+	position: absolute;
+	left: 250px;
+	top: 433px;
+	width: 98px;
+	height: 17px;
+	z-index: 18;
+}
+.roadHor3_copy_6 {
+	background-image: url("img/roadHor3-copy-6.png");
+	position: absolute;
+	left: 207px;
+	top: 257px;
+	width: 40px;
+	height: 66px;
+	z-index: 17;
+}
+.roadHor3_copy_2 {
+	background-image: url("img/roadHor3-copy-2.png");
+	position: absolute;
+	left: 234px;
+	top: 306px;
+	width: 65px;
+	height: 17px;
+	z-index: 16;
+}
+.roadHor3 {
+	background-image: url("img/roadHor3.png");
+	position: absolute;
+	left: 222px;
+	top: 240px;
+	width: 77px;
+	height: 16px;
+	z-index: 15;
+}
+.roadHor2 {
+	background-image: url("img/roadHor2.png");
+	position: absolute;
+	left: 316px;
+	top: 152px;
+	width: 42px;
+	height: 17px;
+	z-index: 14;
+}
+.roadHor1 {
+	background-image: url("img/roadHor1.png");
+	position: absolute;
+	left: 298px;
+	top: 99px;
+	width: 76px;
+	height: 17px;
+	z-index: 13;
+}
+.round6 {
+	left: 343px;
+	top: 426px;
+}
+.round {
+	background-image: url("img/round1.png");
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	z-index: 5;
+}
+.round1 {
+	left: 353px;
+	top: 144px;
+}
+.round5 {
+	left: 222px;
+	top: 426px;
+}
+.round4 {
+	left: 152px;
+	top: 277px;
+}
+.round3 {
+	left: 195px;
+	top: 232px;
+}
+.round2 {
+	left: 289px;
+	top: 144px;
+}
+/*Welcome*/
+.T748 {
+	left: 347px;
+	top: 432px;
+}
+/*Gamification*/
+
+.T750 {
+	left: 290px;
+	top: 432px;
+}
+/*The Journey TEST*/
+
+.T753 {
+	left: 228px;
+	top: 432px;
+}
+/*Letter to instructors*/
+
+.T759 {
+	left: 188px;
+	top: 432px;
+}
+/*Letter to Students*/
+
+.T760 {
+	left: 157px;
+	top: 428px;
+}
+/*Syllabus*/
+
+.T761 {
+	left: 157px;
+	top: 394px;
+}
+/*State of Oklahoma PASS Objectives*/
+
+.T762 {
+	left: 157px;
+	top: 359px;
+}
+/*Common Core Standards*/
+.T763 {
+	left: 157px;
+	top: 325px;
+}
+.T767 {
+	left: 157px;
+	top: 283px;
+}
+/*Creating Objectives*/
+.T768 {
+	left: 101px;
+	top: 279px;
+}
+/*OBJ Post TEST*/
+.T769 {
+	left: 101px;
+	top: 238px;
+}
+/*Individual Identification Plan - Objectives*/
+.T770 {
+	left: 152px;
+	top: 238px;
+}
+/*Individual Identification Plan - Technologies Pretest*/
+.T773 {
+	left: 199px;
+	top: 238px;
+}
+/*Finding and Applying Technologies*/
+.T774 {
+	left: 230px;
+	top: 304px;
+}
+/*Individual Identification Plan - Technologies Post Test*/
+.T775 {
+	left: 293px;
+	top: 302px;
+}
+/*Teacher Technologies*/
+.T776 {
+	left: 293px;
+	top: 246px;
+}
+/*Student Technologies*/
+.T777 {
+	left: 293px;
+	top: 200px;
+}
+/*Individual Identification Plan - Full Pretest*/
+.T780 {
+	left: 293px;
+	top: 147px;
+}
+/*Creating an Individual Identification Plan*/
+.T781 {
+	left: 293px;
+	top: 98px;
+}
+/*Individual Identification Plan - Full Post Test*/
+.T782 {
+	left: 356px;
+	top: 99px;
+}
+/*Individual Identification Plan - Full*/
+.T783 {
+	left: 358px;
+	top: 149px;
+}
+.contentLink {
+	display: hidden;
+}
+.T779 {
+	display: none;
+}
+.T766 {
+	display: none;
+}
+.T772 {
+	display: none;
+}

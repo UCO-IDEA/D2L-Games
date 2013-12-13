@@ -1,0 +1,107 @@
+--- samples/GettingStartedSample/sample.js	(revision 850)
++++ samples/GettingStartedSample/sample.js	(working copy)
+@@ -18,72 +18,38 @@
+  * Javascript functions for the sample HTML file                              *
+  ******************************************************************************/
+ 
+-// Button Handling Methods
+-function getVersions() {
+-    var host = $('#hostField').val();
+-    var port = $('#portField').val();
++ function doAPIRequest() {
+ 
+-    $.ajax({
+-	           url: "getVersions.php",
+-	           data: {
+-		           host: host,
+-		           port: port
+-	           },
+-	           success: function(data) {
+-		           $('#result').html(data);
+-	           },
+-	           error: function (jqXHR, textStatus, errorThrown) {
+-		           $('#resultHeading').html("Error:");
+-		           $('#result').html(textStatus);
+-	           }
+-	       });
+-}
++	var host = $('#hostField').val();
++	var port = $('#portField').val();
++	var scheme = $('#schemeField').is(':checked') ? 'https' : 'http';
++	var req = $('#actionField').val();
++	var method = $('#GETField').is(':checked') ? "GET" : "POST";
++	var data = $('#dataField').val();
+ 
+-function whoAmI() {
+-    var host = $('#hostField').val();
+-    var port = $('#portField').val();
+-
+-    $.ajax({
+-	           url: "whoAmI.php",
+-	           data: {
+-		           host: host,
+-		           port: port
+-	           },
+-	           success: function(data) {
+-		           $('#result').html(data);
+-	           },
+-	           error: function (jqXHR, textStatus, errorThrown) {
+-		           $('#resultHeading').html("Error:");
+-		           $('#result').html(textStatus);
+-	           }
+-	       });
+-}
+-
+-function clearTextArea() {
+-    $("#resultHeading").html("&nbsp;");
+-    $("#result").html("&nbsp;");
+-}
+-
+-function save() {
+-    var appKey = $('#appKeyField').val();
+-    var appId = $('#appIDField').val();
+-    var userKey = $('#userKeyField').val();
+-    var userId = $('#userIDField').val();
+-
+-    $.ajax({
+-	           url: "saveKeys.php",
+-	           data: {
+-		           appKey: appKey,
+-		           appId: appId,
+-		           userKey: userKey,
+-		           userId: userId
+-	           },
+-	           success: function(data) {
+-		           $('#result').html(data);
+-	           },
+-	           error: function (jqXHR, textStatus, errorThrown) {
+-		           $('#resultHeading').html("Error:");
+-		           $('#result').html(textStatus);
+-	           }
+-	       });
+-}+	$.ajax({
++				url: "doRequest.php",
++				data: {
++					host: host,
++					port: port,
++					scheme: scheme,
++					apiRequest: req,
++					apiMethod: method,
++					data: data,
++					anon: false,
++				},
++				success: function(data) {
++					var output;
++					try {
++						output = JSON.stringify(JSON.parse(data), null, 4);
++					} catch(e) {
++						output = "An error happened!";
++						console.log(data);
++					}
++					$('#responseField').val(output);
++				},
++				error: function(jqXHR, textStatus, errorThrown) {
++					console.log('Error: ' + textStatus);
++				},
++			});
++ }
